@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BananaBot - La IA Frutal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fffacd; /* Amarillo claro tipo banana */
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #228b22; /* Verde frutal */
+        }
+        #chat-container {
+            width: 400px;
+            height: 500px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border: 2px solid #ffd700; /* Borde dorado */
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        #chat-box {
+            height: 400px;
+            padding: 10px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ccc;
+        }
+        #input-container {
+            display: flex;
+            padding: 10px;
+        }
+        #user-input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ffd700;
+            border-radius: 5px;
+        }
+        #send-btn {
+            margin-left: 10px;
+            padding: 5px 15px;
+            background-color: #228b22;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #send-btn:hover {
+            background-color: #006400;
+        }
+        .message {
+            margin: 10px 0;
+            padding: 8px;
+            border-radius: 5px;
+            text-align: left;
+        }
+        .user-message {
+            background-color: #ffd700;
+            margin-left: 20%;
+        }
+        .bot-message {
+            background-color: #90ee90;
+            margin-right: 20%;
+        }
+    </style>
+</head>
+<body>
+    <h1>BananaBot - La IA que Pela Ganancias</h1>
+    <div id="chat-container">
+        <div id="chat-box"></div>
+        <div id="input-container">
+            <input type="text" id="user-input" placeholder="Habla con BananaBot...">
+            <button id="send-btn">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        const sendBtn = document.getElementById('send-btn');
+
+        // Respuestas predefinidas de BananaBot
+        const botResponses = [
+            "¡Soy BananaBot! Mis circuitos frutales predicen un pump inminente. ¿Compraste $BBOT ya?",
+            "Pela el mercado antes de que se pudra. ¿Qué quieres saber?",
+            "Procesando con mi IA banánica... ¡Listo! ¿Cuál es tu siguiente jugada?",
+            "No soy una banana cualquiera, soy un bot con sabor a ganancias.",
+            "¡Alerta de sniper! $BBOT está madurando rápido en Pump.fun."
+        ];
+
+        // Función para agregar mensajes al chat
+        function addMessage(message, className) {
+            const msgDiv = document.createElement('div');
+            msgDiv.classList.add('message', className);
+            msgDiv.textContent = message;
+            chatBox.appendChild(msgDiv);
+            chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll al final
+        }
+
+        // Función para simular respuesta del bot
+        function getBotResponse(userMessage) {
+            const lowerMessage = userMessage.toLowerCase();
+            if (lowerMessage.includes('hola')) {
+                return "¡Hola, humano! Soy BananaBot, la IA más sabrosa de Solana.";
+            } else if (lowerMessage.includes('precio') || lowerMessage.includes('$bbot')) {
+                return "No tengo datos en tiempo real, pero $BBOT está listo para despegar. ¡Checa Pump.fun!";
+            } else {
+                // Respuesta aleatoria si no hay coincidencia
+                return botResponses[Math.floor(Math.random() * botResponses.length)];
+            }
+        }
+
+        // Evento al hacer clic en "Enviar"
+        sendBtn.addEventListener('click', () => {
+            const message = userInput.value.trim();
+            if (message) {
+                addMessage(message, 'user-message');
+                setTimeout(() => {
+                    const botReply = getBotResponse(message);
+                    addMessage(botReply, 'bot-message');
+                }, 1000); // Retraso de 1 segundo para simular "pensamiento"
+                userInput.value = ''; // Limpia el input
+            }
+        });
+
+        // Enviar mensaje con Enter
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
